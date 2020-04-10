@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>News List</h1>
+<form method='GET' action=''>
+<input type='text' name='q' placeholder='Search' value='{{ request.get.q }}' />
+<input type='submit' value='Search'/>
+</form>
+<div class="object_list">
+     {% for instance in object_list %}
+          <div class="object">
+          <h2><a href="{% url 'news:news_detail' id=instance.id %}">{{instance.title}}</a></h2>
+          <h5>{{instance.date}}</h5>
+          {% if instance.image is not None %}
+               <img src="{{instance.image.url}}" width="500px" height="300px" />
+          {% endif %}
+          <p>{{instance.snippet}}</p>
+          <p class="author">added by {{ instance.author.username }}</p>
+          </div>
+     {% endfor %}
+</div>
+
+
+{% endblock %}

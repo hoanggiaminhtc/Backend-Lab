@@ -1,0 +1,19 @@
+<nav>
+    <ul>
+        
+        <li><a href="/">Home</a></li>
+        <li><a href="/news">News</a></li>
+        {% if user.is_authenticated %}
+        <li>
+            <form class="logout-link" action="{% url 'accounts:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+        <li><a href="{% url 'news:news_create' %}" class="highlight">Create News</a></li>
+        {% else %}
+        <li><a href="{% url 'accounts:login' %}">Login</a></li>
+        <li><a href="{% url 'accounts:signup' %}">Signup</a></li>
+        {% endif %}
+    </ul>
+</nav>
